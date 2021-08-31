@@ -17,18 +17,25 @@ function TodoItem({
   isCheck,
   createdAt,
 }: TodoItemProps): ReactElement {
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('del ', id);
+  };
+
+  const handleCheck = () => {
+    console.log('status change', id);
+  };
   return (
     <ItemWrapper>
-      <ButtonCheck isCheck={isCheck}>
+      <ButtonCheck isCheck={isCheck} onClick={handleCheck}>
         <CheckOutlined />
       </ButtonCheck>
 
       <ContentWrapper>
-        <ItemContent>{content}</ItemContent>
+        <ItemContent isCheck={isCheck}>{content}</ItemContent>
         <ItemCreatedAt>created at {createdAt}</ItemCreatedAt>
       </ContentWrapper>
 
-      <ButtonDelete>
+      <ButtonDelete onClick={handleDelete}>
         <DeleteOutlined />
       </ButtonDelete>
     </ItemWrapper>
@@ -52,7 +59,9 @@ const ContentWrapper = styled.div`
   line-height: 2rem;
 `;
 
-const ItemContent = styled.div`
+const ItemContent = styled.div<{ isCheck: boolean }>`
+  text-decoration: ${({ isCheck }) => (isCheck ? 'line-through' : 'none')};
+  color: ${({ isCheck }) => (isCheck ? '#c6bccc' : '#38353f')};
   font-weight: 600;
 `;
 

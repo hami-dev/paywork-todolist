@@ -5,6 +5,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 function TodoInput() {
   const [inputValue, setInputValue] = useState('');
 
+  // submit 할 시 공백이면 alert출력
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
