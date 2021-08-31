@@ -4,6 +4,7 @@ import { TODO_ITEM_LIST } from 'Constant';
 import { Itodo } from 'Utils/HandleTodos';
 import styled from 'styled-components';
 import { CustomButton } from 'Components/TodoInput';
+import { useSelector } from 'react-redux';
 
 function TodoList() {
   const todoList: Itodo[] = TODO_ITEM_LIST.todoList;
@@ -11,9 +12,20 @@ function TodoList() {
   const [filter, setFilter] = useState<string>('all');
   const [todos, setTodos] = useState<Itodo[]>(todoList);
 
+  const todoData = useSelector((state: any) => state.todoList);
+
+  // useEffect(() => {
+  //   console.log('기본값 : ', todoList);
+  //   console.log('todoList에서 : ', todoData.todoList);
+  //   setTodos(todoData);
+  // }, [todoData]);
+
   useEffect(() => {
-    console.log(filter);
-    let filteredTodo: Itodo[] = [];
+    // console.log(filter);
+    console.log('기본값 : ', todoList);
+    console.log('todoList에서 : ', todoData.todoList);
+
+    let filteredTodo: Itodo[] = todoData.todoList;
 
     if (filter === 'all') {
       filteredTodo = todoList;
@@ -21,15 +33,13 @@ function TodoList() {
 
     if (filter === 'todo') {
       filteredTodo = todoList.filter((item) => !item.isCheck);
-      console.log(filteredTodo);
     }
     if (filter === 'done') {
       filteredTodo = todoList.filter((item) => item.isCheck);
-      console.log(filteredTodo);
     }
 
     setTodos(filteredTodo);
-  }, [filter]);
+  }, [filter, todoData]);
 
   // 버튼을 클릭할 경우 필터링 변경
   const handleFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,14 +72,15 @@ function TodoList() {
         </FilterButton>
       </ButtonWrapper>
       <ItemListWrapper>
-        {todos.map((todo) => (
-          <TodoItem
-            id={todo.id}
-            content={todo.content}
-            isCheck={todo.isCheck}
-            createdAt={todo.createdAt}
-          />
-        ))}
+        {todos.length > 0 &&
+          todos.map((todo) => (
+            <TodoItem
+              id={todo.id}
+              content={todo.content}
+              isCheck={todo.isCheck}
+              createdAt={todo.createdAt}
+            />
+          ))}
       </ItemListWrapper>
     </>
   );

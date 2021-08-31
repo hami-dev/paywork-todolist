@@ -15,17 +15,5 @@ export const TODO_ITEM_LIST = {
       createdAt: '2021-03-03',
       isCheck: false,
     },
-    {
-      id: '3',
-      content: '안끝난일2',
-      createdAt: '2021-04-03',
-      isCheck: false,
-    },
-    {
-      id: '4',
-      content: '끝난일2',
-      createdAt: '2021-05-03',
-      isCheck: true,
-    },
   ],
 };
