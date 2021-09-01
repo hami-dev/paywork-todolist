@@ -35,10 +35,14 @@ export type ActionType =
   //get Filtered Todo
   | { type: 'GET_FILTER_TODO_REQUEST' }
   | { type: 'GET_FILTER_TODO_SUCCESS'; data: string }
-  | { type: 'GET_FILTER_TODO_FAILURE' };
+  | { type: 'GET_FILTER_TODO_FAILURE' }
+  // get TODO LIST
+  | { type: 'GET_TODO_LIST_REQUEST' }
+  | { type: 'GET_TODO_LIST_SUCCESS'; data: any }
+  | { type: 'GET_TODO_LIST_FAILURE' };
 
 export const initialState = {
-  count: 4,
+  count: 1,
   todoList: [
     {
       id: '1',
@@ -46,23 +50,16 @@ export const initialState = {
       createdAt: '2021-08-30T15:58:50.023Z',
       isCheck: true,
     },
-    {
-      id: '2',
-      content: '방 청소 하기',
-      createdAt: '2021-08-31T15:59:09.942Z',
-      isCheck: true,
-    },
-    {
-      id: '3',
-      content: '과제 제출하기',
-      createdAt: '2021-09-01T15:59:09.942Z',
-      isCheck: false,
-    },
-    {
-      id: '4',
-      content: '가을 옷 꺼내기',
-      createdAt: '2021-09-01T15:59:09.942Z',
-      isCheck: false,
-    },
   ],
+};
+
+const BASE_URL = 'http://dummy-server.io';
+
+export const fetchTodos: any = () => {
+  return fetch(BASE_URL + ':4000/todo').then((res) => {
+    if (!res.ok) {
+      console.log(res.statusText); //error
+    }
+    return res.json();
+  });
 };

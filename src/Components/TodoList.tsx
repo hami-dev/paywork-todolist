@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TodoItem from 'Components/TodoItem';
 import { CustomButton } from 'Components/TodoInput';
+import { getTodoListRequest } from 'Store/actions/action';
 import { Itodo } from 'Utils/HandleTodos';
+
 import styled from 'styled-components';
 
 function TodoList() {
@@ -12,6 +14,13 @@ function TodoList() {
   const [filter, setFilter] = useState<string>('all');
   const [filtering, setFiltering] = useState<boolean>(false);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTodoListRequest());
+  }, []);
+
+  // 변경한 필터링 적용
   useEffect(() => {
     if (filter === 'all') {
     }

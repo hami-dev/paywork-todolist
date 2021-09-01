@@ -1,6 +1,3 @@
-export const GET_TODO_DATA = 'GET_TODO_DATA';
-export const GET_TODO_LIST = 'GET_TODO_LIST';
-
 export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
 export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
 export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
@@ -20,6 +17,10 @@ export const UPDATE_CONTENT_FAILURE = 'UPDATE_CONTENT_FAILURE';
 export const GET_FILTER_TODO_REQUEST = 'GET_FILTER_TODO_REQUEST';
 export const GET_FILTER_TODO_SUCCESS = 'GET_FILTER_TODO_SUCCESS';
 export const GET_FILTER_TODO_FAILURE = 'GET_FILTER_TODO_FAILURE';
+
+export const GET_TODO_LIST_REQUEST = 'GET_TODO_LIST_REQUEST';
+export const GET_TODO_LIST_SUCCESS = 'GET_TODO_LIST_SUCCESS';
+export const GET_TODO_LIST_FAILURE = 'GET_TODO_LIST_FAILURE';
 
 const addTodoRequest = (newTodo: string) => {
   return {
@@ -126,6 +127,26 @@ const getFilterTodoFailure = (error: any) => {
   };
 };
 
+const getTodoListRequest = () => {
+  return {
+    type: GET_TODO_LIST_REQUEST,
+  };
+};
+
+const getTodoListSuccess = (data: any) => {
+  return {
+    type: GET_TODO_LIST_SUCCESS,
+    data: data,
+  };
+};
+
+const getTodoListFailure = (error: any) => {
+  return {
+    type: GET_TODO_LIST_FAILURE,
+    error: error,
+  };
+};
+
 export {
   // add
   addTodoRequest,
@@ -147,4 +168,8 @@ export {
   getFilterTodoRequest,
   getFilterTodoSuccess,
   getFilterTodoFailure,
+  // get list
+  getTodoListRequest,
+  getTodoListSuccess,
+  getTodoListFailure,
 };

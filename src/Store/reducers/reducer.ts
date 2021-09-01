@@ -16,14 +16,13 @@ import {
   UPDATE_CONTENT_REQUEST,
   UPDATE_CONTENT_SUCCESS,
   UPDATE_CONTENT_FAILURE,
-  // GET FILTER TODO
-  GET_FILTER_TODO_REQUEST,
-  GET_FILTER_TODO_SUCCESS,
-  GET_FILTER_TODO_FAILURE,
+  // GET LIST
+  GET_TODO_LIST_REQUEST,
+  GET_TODO_LIST_SUCCESS,
+  GET_TODO_LIST_FAILURE,
 } from 'Store/actions/action';
 
 import { initialState, ActionType } from 'Utils/HandleTodos';
-import TodoList from 'Components/TodoList';
 
 const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
@@ -114,6 +113,23 @@ const reducer = (state = initialState, action: ActionType) => {
     }
 
     case UPDATE_CONTENT_FAILURE: {
+      return state;
+    }
+
+    case GET_TODO_LIST_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case GET_TODO_LIST_SUCCESS: {
+      const todo = action.data;
+      return {
+        ...todo,
+      };
+    }
+
+    case GET_TODO_LIST_FAILURE: {
       return state;
     }
 
