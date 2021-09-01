@@ -13,23 +13,23 @@ export const UPDATE_STATUS_REQUEST = 'UPDATE_STATUS_REQUEST';
 export const UPDATE_STATUS_SUCCESS = 'UPDATE_STATUS_SUCCESS';
 export const UPDATE_STATUS_FAILURE = 'UPDATE_STATUS_FAILURE';
 
-const getTodoDataAction = (data: any) => ({
-  type: GET_TODO_DATA,
-  data,
-});
+// const getTodoDataAction = (data: any) => ({
+//   type: GET_TODO_DATA,
+//   data,
+// });
 
-const getTodoListAction = () => ({
-  type: GET_TODO_LIST,
-});
+// const getTodoListAction = () => ({
+//   type: GET_TODO_LIST,
+// });
 
-const addTodoRequest = (newTodo: any) => {
+const addTodoRequest = (newTodo: string) => {
   return {
     type: ADD_TODO_REQUEST,
     data: newTodo,
   };
 };
 
-const addTodoSuccess = (data: any) => {
+const addTodoSuccess = (data: string) => {
   return {
     type: ADD_TODO_SUCCESS,
     data,
@@ -50,7 +50,7 @@ const deleteTodoRequest = (todoId: string) => {
   };
 };
 
-const deleteTodoSuccess = (data: any) => {
+const deleteTodoSuccess = (data: string) => {
   return {
     type: DELETE_TODO_SUCCESS,
     data,
@@ -86,8 +86,8 @@ const upadteStatusFailure = (error: any) => {
 };
 
 export {
-  getTodoDataAction,
-  getTodoListAction,
+  // getTodoDataAction,
+  // getTodoListAction,
   addTodoRequest,
   addTodoSuccess,
   addTodoFailure,

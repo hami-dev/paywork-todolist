@@ -15,7 +15,12 @@ import {
   upadteStatusFailure,
 } from 'Store/actions/action';
 
-function* addTodo(action: any) {
+type Action = {
+  type: string;
+  data: string;
+};
+
+function* addTodo(action: Action) {
   try {
     yield delay(500);
     yield put(addTodoSuccess(action.data));
@@ -28,7 +33,7 @@ function* watchAdd() {
   yield takeLatest(ADD_TODO_REQUEST, addTodo);
 }
 
-function* deleteTodo(action: any) {
+function* deleteTodo(action: Action) {
   try {
     yield delay(500);
     yield put(deleteTodoSuccess(action.data));
@@ -41,7 +46,7 @@ function* watchDelete() {
   yield takeLatest(DELETE_TODO_REQUEST, deleteTodo);
 }
 
-function* updateTodo(action: any) {
+function* updateTodo(action: Action) {
   try {
     yield delay(100);
     yield put(upadteStatusSuccess(action.data));

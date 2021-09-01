@@ -11,23 +11,9 @@ import {
   UPDATE_STATUS_FAILURE,
 } from 'Store/actions/action';
 
-import { Itodo, initialState, IState } from 'Utils/HandleTodos';
+import { initialState, ActionType } from 'Utils/HandleTodos';
 
-type Action =
-  //add
-  | { type: 'ADD_TODO_REQUEST' }
-  | { type: 'ADD_TODO_SUCCESS'; data: string }
-  | { type: 'ADD_TODO_FAILURE' }
-  //del
-  | { type: 'DELETE_TODO_REQUEST' }
-  | { type: 'DELETE_TODO_SUCCESS'; data: string }
-  | { type: 'DELETE_TODO_FAILURE' }
-  //update
-  | { type: 'UPDATE_STATUS_REQUEST' }
-  | { type: 'UPDATE_STATUS_SUCCESS'; data: string }
-  | { type: 'UPDATE_STATUS_FAILURE' };
-
-const reducer = (state = initialState, action: Action) => {
+const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
     // ADD
     case ADD_TODO_REQUEST: {
