@@ -2,7 +2,7 @@
 
 ## 💗Project Link
 
-🔗 배포 주소 | < >
+🔗 배포 주소 | <https://herin-paywork-todolist.netlify.app/>
 
 <br>
 
