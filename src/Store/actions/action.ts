@@ -21,15 +21,6 @@ export const GET_FILTER_TODO_REQUEST = 'GET_FILTER_TODO_REQUEST';
 export const GET_FILTER_TODO_SUCCESS = 'GET_FILTER_TODO_SUCCESS';
 export const GET_FILTER_TODO_FAILURE = 'GET_FILTER_TODO_FAILURE';
 
-// const getTodoDataAction = (data: any) => ({
-//   type: GET_TODO_DATA,
-//   data,
-// });
-
-// const getTodoListAction = () => ({
-//   type: GET_TODO_LIST,
-// });
-
 const addTodoRequest = (newTodo: string) => {
   return {
     type: ADD_TODO_REQUEST,
@@ -136,9 +127,6 @@ const getFilterTodoFailure = (error: any) => {
 };
 
 export {
-  // getTodoDataAction,
-  // getTodoListAction,
-
   // add
   addTodoRequest,
   addTodoSuccess,

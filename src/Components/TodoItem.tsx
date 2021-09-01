@@ -1,19 +1,20 @@
 import { useState, ReactElement } from 'react';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+
+import { CustomButton } from 'Components/TodoInput';
+import {
+  deleteTodoRequest,
+  upadteStatusRequest,
+  upadteContentRequest,
+} from 'Store/actions/action';
+
 import {
   CheckOutlined,
   DeleteOutlined,
   EditOutlined,
   SaveOutlined,
 } from '@ant-design/icons';
-import { CustomButton } from 'Components/TodoInput';
-
-import { useDispatch } from 'react-redux';
-import {
-  deleteTodoRequest,
-  upadteStatusRequest,
-  upadteContentRequest,
-} from 'Store/actions/action';
+import styled from 'styled-components';
 
 interface TodoItemProps {
   id: string;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { PlusCircleOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { addTodoRequest } from 'Store/actions/action';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
 
 function TodoInput() {
   const [inputValue, setInputValue] = useState('');

@@ -15,10 +15,6 @@ export type contentType = {
   content: string;
 };
 
-export type FilterType = {
-  filter: boolean;
-};
-
 export type ActionType =
   //add
   | { type: 'ADD_TODO_REQUEST' }

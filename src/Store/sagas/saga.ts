@@ -85,27 +85,11 @@ function* watchUpdateContent() {
   yield takeLatest(UPDATE_CONTENT_REQUEST, updateTodoContent);
 }
 
-// GET FILTER TODO
-function* getFilterTODO(action: any) {
-  console.log(action);
-  try {
-    yield delay(100);
-    yield put(getFilterTodoSuccess(action.data));
-  } catch (error) {
-    yield put(getFilterTodoFailure(error));
-    console.error(error);
-  }
-}
-function* watchGetFilterTodo() {
-  yield takeLatest(GET_FILTER_TODO_REQUEST, getFilterTODO);
-}
-
 export default function* todoSaga() {
   yield all([
     fork(watchAdd),
     fork(watchDelete),
     fork(watchUpdateStatus),
     fork(watchUpdateContent),
-    fork(watchGetFilterTodo),
   ]);
 }

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import TodoItem from './TodoItem';
-import styled from 'styled-components';
-import { CustomButton } from 'Components/TodoInput';
 import { useSelector } from 'react-redux';
+
+import TodoItem from 'Components/TodoItem';
+import { CustomButton } from 'Components/TodoInput';
 import { Itodo } from 'Utils/HandleTodos';
-import { useDispatch } from 'react-redux';
-import { getFilterTodoRequest } from 'Store/actions/action';
+import styled from 'styled-components';
 
 function TodoList() {
   const todoList: Itodo[] = useSelector((state: any) => state.todoList);

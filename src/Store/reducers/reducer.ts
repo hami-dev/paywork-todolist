@@ -117,25 +117,6 @@ const reducer = (state = initialState, action: ActionType) => {
       return state;
     }
 
-    // Get Filtered Todo
-    case GET_FILTER_TODO_REQUEST: {
-      return {
-        ...state,
-      };
-    }
-    case GET_FILTER_TODO_SUCCESS: {
-      const filtering = action.data === 'true' ? true : false;
-      const todo = state.todoList.filter((todo) => todo.isCheck === filtering);
-      return {
-        ...state,
-        count: TodoList.length,
-        todoList: [...todo],
-      };
-    }
-    case GET_FILTER_TODO_FAILURE: {
-      return state;
-    }
-
     default:
       return state;
   }

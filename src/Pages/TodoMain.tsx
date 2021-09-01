@@ -16,6 +16,7 @@ function TodoMain() {
 const TodoMainWrapper = styled.div`
   width: 60%;
   max-width: 55rem;
+  min-width: 36rem;
   height: 80vh;
   min-height: 70rem;
   font-size: 1.4rem;
