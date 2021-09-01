@@ -21,14 +21,13 @@ function TodoItem({
   createdAt,
 }: TodoItemProps): ReactElement {
   const dispatch = useDispatch();
+  const cutCreatedAt = createdAt.substr(0, 10);
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('del ', id);
+  const handleDelete = () => {
     dispatch(deleteTodoRequest(id));
   };
 
   const handleCheck = () => {
-    console.log('status change', id);
     dispatch(upadteStatusRequest(id));
   };
   return (
@@ -39,7 +38,7 @@ function TodoItem({
 
       <ContentWrapper>
         <ItemContent isCheck={isCheck}>{content}</ItemContent>
-        <ItemCreatedAt>created at {createdAt}</ItemCreatedAt>
+        <ItemCreatedAt>created at {cutCreatedAt}</ItemCreatedAt>
       </ContentWrapper>
 
       <ButtonDelete onClick={handleDelete}>

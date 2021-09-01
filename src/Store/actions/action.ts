@@ -5,9 +5,9 @@ export const ADD_TODO_REQUEST = 'ADD_TODO_REQUEST';
 export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
 export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
 
-export const DELETE_TODO_REQUEST = 'DELTE_TODO_REQUEST';
-export const DELETE_TODO_SUCCESS = 'DELTE_TODO_SUCCESS';
-export const DELETE_TODO_FAILURE = 'DELTE_TODO_FAILURE';
+export const DELETE_TODO_REQUEST = 'DELETE_TODO_REQUEST';
+export const DELETE_TODO_SUCCESS = 'DELETE_TODO_SUCCESS';
+export const DELETE_TODO_FAILURE = 'DELETE_TODO_FAILURE';
 
 export const UPDATE_STATUS_REQUEST = 'UPDATE_STATUS_REQUEST';
 export const UPDATE_STATUS_SUCCESS = 'UPDATE_STATUS_SUCCESS';
@@ -67,9 +67,7 @@ const deleteTodoFailure = (error: any) => {
 const upadteStatusRequest = (todoId: string) => {
   return {
     type: UPDATE_STATUS_REQUEST,
-    data: {
-      id: todoId,
-    },
+    data: todoId,
   };
 };
 
