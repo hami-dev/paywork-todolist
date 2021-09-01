@@ -1,11 +1,19 @@
-import React from 'react';
-import { ReactElement } from 'react';
+import { useState, ReactElement } from 'react';
 import styled from 'styled-components';
-import { CheckOutlined, DeleteOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  SaveOutlined,
+} from '@ant-design/icons';
 import { CustomButton } from 'Components/TodoInput';
 
 import { useDispatch } from 'react-redux';
-import { deleteTodoRequest, upadteStatusRequest } from 'Store/actions/action';
+import {
+  deleteTodoRequest,
+  upadteStatusRequest,
+  upadteContentRequest,
+} from 'Store/actions/action';
 
 interface TodoItemProps {
   id: string;
@@ -20,16 +28,38 @@ function TodoItem({
   isCheck,
   createdAt,
 }: TodoItemProps): ReactElement {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  const [newContent, setNewContent] = useState<string>(content);
   const dispatch = useDispatch();
   const cutCreatedAt = createdAt.substr(0, 10);
 
+  // Todo 삭제
   const handleDelete = () => {
     dispatch(deleteTodoRequest(id));
   };
 
+  // Todo 상태(todo, done) 변경
   const handleCheck = () => {
     dispatch(upadteStatusRequest(id));
   };
+
+  // Todo 내용 (content) 수정
+  const handleEditSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleEdit();
+  };
+
+  const handleEdit = () => {
+    if (newContent === '') {
+      alert('수정할 내용을 정확히 입력해주세요!');
+      return;
+    }
+
+    dispatch(upadteContentRequest(id, newContent));
+    setIsEdit(!isEdit);
+  };
+
   return (
     <ItemWrapper>
       <ButtonCheck isCheck={isCheck} onClick={handleCheck}>
@@ -37,10 +67,31 @@ function TodoItem({
       </ButtonCheck>
 
       <ContentWrapper>
-        <ItemContent isCheck={isCheck}>{content}</ItemContent>
+        {isEdit ? (
+          <TodoEditWrapper onSubmit={handleEditSubmit}>
+            <TodoEditInput
+              autoFocus
+              placeholder={content}
+              value={newContent}
+              onChange={(e) => setNewContent(e.target.value)}
+            />
+          </TodoEditWrapper>
+        ) : (
+          <ItemContent isCheck={isCheck}>{newContent}</ItemContent>
+        )}
+
         <ItemCreatedAt>created at {cutCreatedAt}</ItemCreatedAt>
       </ContentWrapper>
 
+      {isEdit ? (
+        <ButtonSubmit onClick={handleEdit}>
+          <SaveOutlined />
+        </ButtonSubmit>
+      ) : (
+        <ButtonEdit onClick={(e) => setIsEdit(!isEdit)}>
+          <EditOutlined />
+        </ButtonEdit>
+      )}
       <ButtonDelete onClick={handleDelete}>
         <DeleteOutlined />
       </ButtonDelete>
@@ -65,6 +116,22 @@ const ContentWrapper = styled.div`
   line-height: 2rem;
 `;
 
+const TodoEditWrapper = styled.form``;
+
+const TodoEditInput = styled.input`
+  width: 90%;
+  height: 2rem;
+  border: none;
+  border-bottom: 1px solid #e9e4f7;
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #d9d0df;
+  }
+`;
+
 const ItemContent = styled.div<{ isCheck: boolean }>`
   text-decoration: ${({ isCheck }) => (isCheck ? 'line-through' : 'none')};
   color: ${({ isCheck }) => (isCheck ? '#c6bccc' : '#38353f')};
@@ -83,6 +150,29 @@ const ButtonCheck = styled(CustomButton)<{ isCheck: boolean }>`
 
 const ButtonDelete = styled(CustomButton)`
   color: #ba0808;
+  transition: 0.5s;
+
+  &:hover {
+    color: #ff7272;
+  }
+`;
+
+const ButtonEdit = styled(CustomButton)`
+  color: #dbc9ff;
+  transition: 0.5s;
+
+  &:hover {
+    color: #8447ff;
+  }
+`;
+
+const ButtonSubmit = styled(CustomButton)`
+  color: #8da99e;
+  transition: 0.5s;
+
+  &:hover {
+    color: #31ff98;
+  }
 `;
 
 export default TodoItem;

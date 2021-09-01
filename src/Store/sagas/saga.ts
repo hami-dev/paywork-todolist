@@ -4,15 +4,19 @@ import {
   ADD_TODO_REQUEST,
   DELETE_TODO_REQUEST,
   UPDATE_STATUS_REQUEST,
+  UPDATE_CONTENT_REQUEST,
   // add
   addTodoSuccess,
   addTodoFailure,
   // del
   deleteTodoSuccess,
   deleteTodoFailure,
-  // update
+  // update status
   upadteStatusSuccess,
   upadteStatusFailure,
+  // update content
+  upadteContentSuccess,
+  upadteContentFailure,
 } from 'Store/actions/action';
 
 type Action = {
@@ -20,6 +24,7 @@ type Action = {
   data: string;
 };
 
+// ADD
 function* addTodo(action: Action) {
   try {
     yield delay(500);
@@ -33,6 +38,7 @@ function* watchAdd() {
   yield takeLatest(ADD_TODO_REQUEST, addTodo);
 }
 
+// DELETE
 function* deleteTodo(action: Action) {
   try {
     yield delay(500);
@@ -46,7 +52,8 @@ function* watchDelete() {
   yield takeLatest(DELETE_TODO_REQUEST, deleteTodo);
 }
 
-function* updateTodo(action: Action) {
+// UPDATE STATE
+function* updateTodoState(action: Action) {
   try {
     yield delay(100);
     yield put(upadteStatusSuccess(action.data));
@@ -55,10 +62,29 @@ function* updateTodo(action: Action) {
     console.error(error);
   }
 }
-function* watchStatusUpdate() {
-  yield takeLatest(UPDATE_STATUS_REQUEST, updateTodo);
+function* watchUpdateStatus() {
+  yield takeLatest(UPDATE_STATUS_REQUEST, updateTodoState);
+}
+
+// UPDATE CONTENT
+function* updateTodoContent(action: Action) {
+  try {
+    yield delay(100);
+    yield put(upadteContentSuccess(action.data));
+  } catch (error) {
+    yield put(upadteContentFailure(error));
+    console.error(error);
+  }
+}
+function* watchUpdateContent() {
+  yield takeLatest(UPDATE_CONTENT_REQUEST, updateTodoContent);
 }
 
 export default function* todoSaga() {
-  yield all([fork(watchAdd), fork(watchDelete), fork(watchStatusUpdate)]);
+  yield all([
+    fork(watchAdd),
+    fork(watchDelete),
+    fork(watchUpdateStatus),
+    fork(watchUpdateContent),
+  ]);
 }

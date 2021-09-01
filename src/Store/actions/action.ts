@@ -13,6 +13,10 @@ export const UPDATE_STATUS_REQUEST = 'UPDATE_STATUS_REQUEST';
 export const UPDATE_STATUS_SUCCESS = 'UPDATE_STATUS_SUCCESS';
 export const UPDATE_STATUS_FAILURE = 'UPDATE_STATUS_FAILURE';
 
+export const UPDATE_CONTENT_REQUEST = 'UPDATE_CONTENT_REQUEST';
+export const UPDATE_CONTENT_SUCCESS = 'UPDATE_CONTENT_SUCCESS';
+export const UPDATE_CONTENT_FAILURE = 'UPDATE_CONTENT_FAILURE';
+
 // const getTodoDataAction = (data: any) => ({
 //   type: GET_TODO_DATA,
 //   data,
@@ -85,6 +89,28 @@ const upadteStatusFailure = (error: any) => {
   };
 };
 
+const upadteContentRequest = (todoId: string, content: string) => {
+  console.log('update', todoId, content);
+  return {
+    type: UPDATE_CONTENT_REQUEST,
+    data: { todoId, content },
+  };
+};
+
+const upadteContentSuccess = (data: any) => {
+  return {
+    type: UPDATE_CONTENT_SUCCESS,
+    data,
+  };
+};
+
+const upadteContentFailure = (error: any) => {
+  return {
+    type: UPDATE_CONTENT_FAILURE,
+    error: error,
+  };
+};
+
 export {
   // getTodoDataAction,
   // getTodoListAction,
@@ -97,4 +123,7 @@ export {
   upadteStatusRequest,
   upadteStatusSuccess,
   upadteStatusFailure,
+  upadteContentRequest,
+  upadteContentSuccess,
+  upadteContentFailure,
 };

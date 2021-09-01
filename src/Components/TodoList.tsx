@@ -3,25 +3,26 @@ import TodoItem from './TodoItem';
 import styled from 'styled-components';
 import { CustomButton } from 'Components/TodoInput';
 import { useSelector } from 'react-redux';
+import { Itodo } from 'Utils/HandleTodos';
 
 function TodoList() {
-  const todoList: any = useSelector((state: any) => state.todoList);
+  const todoList: Itodo[] = useSelector((state: any) => state.todoList);
 
   const [filter, setFilter] = useState<string>('all');
-  const [todos, setTodos] = useState<any>(todoList);
+  const [fTodo, setTodos] = useState<Itodo[]>([]);
 
   useEffect(() => {
-    let filteredTodo: any = [];
+    let filteredTodo: Itodo[] = [];
 
     if (filter === 'all') {
       filteredTodo = todoList;
     }
 
     if (filter === 'todo') {
-      filteredTodo = todoList.filter((item: any) => !item.isCheck);
+      filteredTodo = todoList.filter((item: Itodo) => item.isCheck === false);
     }
     if (filter === 'done') {
-      filteredTodo = todoList.filter((item: any) => item.isCheck);
+      filteredTodo = todoList.filter((item: Itodo) => item.isCheck === true);
     }
 
     setTodos(filteredTodo);
@@ -37,29 +38,32 @@ function TodoList() {
       <ButtonWrapper>
         <FilterButton
           id="all"
-          onClick={handleFilterButton}
+          // onClick={handlFilterButton}
+          onClick={(e) => setFilter('all')}
           filterSelected={filter === 'all'}
         >
           All
         </FilterButton>
         <FilterButton
           id="todo"
-          onClick={handleFilterButton}
+          // onClick={handleFilterButton}
+          onClick={(e) => setFilter('todo')}
           filterSelected={filter === 'todo'}
         >
           TO DO
         </FilterButton>
         <FilterButton
           id="done"
-          onClick={handleFilterButton}
+          // onClick={handleFilterButton}
+          onClick={(e) => setFilter('done')}
           filterSelected={filter === 'done'}
         >
           DONE
         </FilterButton>
       </ButtonWrapper>
       <ItemListWrapper>
-        {todos &&
-          todos.map((todo: any) => (
+        {fTodo &&
+          fTodo.map((todo: any) => (
             <TodoItem
               id={todo.id}
               content={todo.content}
