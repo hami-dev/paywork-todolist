@@ -6,6 +6,9 @@ import {
   DELETE_TODO_REQUEST,
   DELETE_TODO_SUCCESS,
   DELETE_TODO_FAILURE,
+  UPDATE_STATUS_REQUEST,
+  UPDATE_STATUS_SUCCESS,
+  UPDATE_STATUS_FAILURE,
 } from 'Store/actions/action';
 // import { combineReducers } from 'redux';
 
@@ -41,6 +44,7 @@ const initialState = {
 
 const reducer: any = (state = initialState, action: any) => {
   switch (action.type) {
+    // ADD
     case ADD_TODO_REQUEST: {
       return {
         ...state,
@@ -63,26 +67,48 @@ const reducer: any = (state = initialState, action: any) => {
         ],
       };
     }
-
     case ADD_TODO_FAILURE: {
       return state;
     }
 
+    // DELETE
     case DELETE_TODO_REQUEST: {
       return {
         ...state,
       };
     }
+
     case DELETE_TODO_SUCCESS: {
-      console.log('delete success');
       const todo = state.todoList.filter((todo) => todo.id !== action.data);
-      console.log('delete...', todo);
       return {
         ...state,
-        todo,
+        count: state.count - 1,
+        todoList: [...todo],
       };
     }
     case DELETE_TODO_FAILURE: {
+      return state;
+    }
+
+    // UPDATE
+    case UPDATE_STATUS_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case UPDATE_STATUS_SUCCESS: {
+      const todo = state.todoList.map((todo) => {
+        if (todo.id === action.data.id) {
+          todo.isCheck = todo.isCheck ? false : true;
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        todoList: [...todo],
+      };
+    }
+    case UPDATE_STATUS_FAILURE: {
       return state;
     }
   } // end switch

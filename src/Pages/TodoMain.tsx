@@ -1,23 +1,9 @@
-import { useEffect } from 'react';
 import Header from 'Components/Header';
 import TodoList from 'Components/TodoList';
 import styled from 'styled-components';
 import TodoInput from 'Components/TodoInput';
 
-import { connect } from 'react-redux';
-import { getTodoListAction } from 'Store/actions/action';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
-import store from 'Store/index';
-
 function TodoMain() {
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(getTodoListAction());
-  // }, []);
-
   return (
     <TodoMainWrapper>
       <Header />
@@ -42,6 +28,3 @@ const TodoMainWrapper = styled.div`
 `;
 
 export default TodoMain;
-// export default withRedux((initialState: any) => {
-//   return store;
-// })(TodoMain);

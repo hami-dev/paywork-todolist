@@ -5,7 +5,7 @@ import { CheckOutlined, DeleteOutlined } from '@ant-design/icons';
 import { CustomButton } from 'Components/TodoInput';
 
 import { useDispatch } from 'react-redux';
-import { deleteTodoRequest } from 'Store/actions/action';
+import { deleteTodoRequest, upadteStatusRequest } from 'Store/actions/action';
 
 interface TodoItemProps {
   id: string;
@@ -29,6 +29,7 @@ function TodoItem({
 
   const handleCheck = () => {
     console.log('status change', id);
+    dispatch(upadteStatusRequest(id));
   };
   return (
     <ItemWrapper>

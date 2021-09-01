@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import TodoItem from './TodoItem';
-import { TODO_ITEM_LIST } from 'Constant';
-import { Itodo } from 'Utils/HandleTodos';
 import styled from 'styled-components';
 import { CustomButton } from 'Components/TodoInput';
 import { useSelector } from 'react-redux';
-import rootSaga from 'Store/sagas';
 
 function TodoList() {
-  // const todoList: Itodo[] = TODO_ITEM_LIST.todoList;
   const todoList: any = useSelector((state: any) => state.todoList);
-  // const todoList = useSelector((state: any) => state.reducer);
 
   const [filter, setFilter] = useState<string>('all');
   const [todos, setTodos] = useState<any>(todoList);
 
   useEffect(() => {
-    console.log(todoList);
     let filteredTodo: any = [];
 
     if (filter === 'all') {
@@ -92,6 +86,12 @@ const FilterButton = styled(CustomButton)<{ filterSelected: boolean }>`
   height: 4rem;
   box-sizing: content-box;
   margin: 0 1rem;
+  transition: 1.5s;
+
+  /* &:hover {
+    border-bottom: ${({ filterSelected }) =>
+    filterSelected ? '1px solid #996dbf' : '1px solid  #d9d0df'};
+  } */
 `;
 
 const ItemListWrapper = styled.ul``;

@@ -9,6 +9,10 @@ export const DELETE_TODO_REQUEST = 'DELTE_TODO_REQUEST';
 export const DELETE_TODO_SUCCESS = 'DELTE_TODO_SUCCESS';
 export const DELETE_TODO_FAILURE = 'DELTE_TODO_FAILURE';
 
+export const UPDATE_STATUS_REQUEST = 'UPDATE_STATUS_REQUEST';
+export const UPDATE_STATUS_SUCCESS = 'UPDATE_STATUS_SUCCESS';
+export const UPDATE_STATUS_FAILURE = 'UPDATE_STATUS_FAILURE';
+
 const getTodoDataAction = (data: any) => ({
   type: GET_TODO_DATA,
   data,
@@ -60,6 +64,29 @@ const deleteTodoFailure = (error: any) => {
   };
 };
 
+const upadteStatusRequest = (todoId: string) => {
+  return {
+    type: UPDATE_STATUS_REQUEST,
+    data: {
+      id: todoId,
+    },
+  };
+};
+
+const upadteStatusSuccess = (data: any) => {
+  return {
+    type: UPDATE_STATUS_SUCCESS,
+    data,
+  };
+};
+
+const upadteStatusFailure = (error: any) => {
+  return {
+    type: UPDATE_STATUS_FAILURE,
+    error: error,
+  };
+};
+
 export {
   getTodoDataAction,
   getTodoListAction,
@@ -69,4 +96,7 @@ export {
   deleteTodoRequest,
   deleteTodoSuccess,
   deleteTodoFailure,
+  upadteStatusRequest,
+  upadteStatusSuccess,
+  upadteStatusFailure,
 };

@@ -1,30 +1,27 @@
 import { delay, all, fork, takeLatest, put } from 'redux-saga/effects';
 
 import {
-  GET_TODO_LIST,
   ADD_TODO_REQUEST,
-  ADD_TODO_SUCCESS,
-  ADD_TODO_FAILURE,
   DELETE_TODO_REQUEST,
-  DELETE_TODO_SUCCESS,
-  DELETE_TODO_FAILURE,
-  getTodoDataAction,
-  addTodoRequest,
+  UPDATE_STATUS_REQUEST,
+  // add
   addTodoSuccess,
   addTodoFailure,
-  deleteTodoRequest,
+  // del
   deleteTodoSuccess,
   deleteTodoFailure,
+  // update
+  upadteStatusSuccess,
+  upadteStatusFailure,
 } from 'Store/actions/action';
 
 function* addTodo(action: any) {
   try {
     yield delay(500);
-    // yield put(addTodoSuccess({ data: action.data }));
     yield put(addTodoSuccess(action.data));
-  } catch (e) {
-    yield put(addTodoFailure({ e }));
-    console.error(e);
+  } catch (error) {
+    yield put(addTodoFailure(error));
+    console.error(error);
   }
 }
 function* watchAdd() {
@@ -34,17 +31,29 @@ function* watchAdd() {
 function* deleteTodo(action: any) {
   try {
     yield delay(500);
-    // yield put(deleteTodoSuccess({ data: action.data }));
     yield put(deleteTodoSuccess(action.data));
-  } catch (e) {
-    yield put(deleteTodoFailure({ e }));
-    console.error(e);
+  } catch (error) {
+    yield put(deleteTodoFailure(error));
+    console.error(error);
   }
 }
 function* watchDelete() {
   yield takeLatest(DELETE_TODO_REQUEST, deleteTodo);
 }
 
+function* updateTodo(action: any) {
+  try {
+    yield delay(100);
+    yield put(upadteStatusSuccess(action.data));
+  } catch (error) {
+    yield put(upadteStatusFailure(error));
+    console.error(error);
+  }
+}
+function* watchStatusUpdate() {
+  yield takeLatest(UPDATE_STATUS_REQUEST, updateTodo);
+}
+
 export default function* todoSaga() {
-  yield all([fork(watchAdd), fork(watchDelete)]);
+  yield all([fork(watchAdd), fork(watchDelete), fork(watchStatusUpdate)]);
 }
