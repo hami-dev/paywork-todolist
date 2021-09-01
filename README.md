@@ -29,12 +29,30 @@
 
 ## 🔧Build Installation
 
+- 설치 및 시작
+
 ```bash
 # install dependencies
 $ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run start
+```
+
+- 서버 설정을 위해 hosts 파일에 추가 (Optional)
+
+```
+127.0.0.1 dummy-server.io
+```
+
+- hosts 파일 수정 후 json-server 실행 (Optional)
+
+```bash
+# install json-server
+$ npm i -g json-server
+
+# run
+$ npx json-server ./public/Data/data.json --port 4000
 ```
 
 <br>
