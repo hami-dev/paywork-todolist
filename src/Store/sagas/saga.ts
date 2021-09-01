@@ -23,7 +23,7 @@ import {
   getTodoListFailure,
 } from 'Store/actions/action';
 
-import { fetchTodos } from 'Utils/HandleTodos';
+import { fetchTodos } from 'Utils/Api';
 
 type Action = {
   type: string;

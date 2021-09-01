@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Itodo } from 'Utils/HandleTodos';
+
 import styled from 'styled-components';
 
 function Header() {
   const [timeString, setTimeString] = useState<string>('');
+  const todoList: Itodo[] = useSelector((state: any) => state.todoList);
+
+  const todoCount: number = todoList.filter(
+    (todo) => todo.isCheck === false,
+  ).length;
 
   useEffect(() => {
     setNowTime();
@@ -34,7 +42,12 @@ function Header() {
     }, 60000);
   }
 
-  return <HeaderWrapper>{timeString}</HeaderWrapper>;
+  return (
+    <HeaderWrapper>
+      <span>{timeString}</span>
+      <span> {todoCount} todos left</span>
+    </HeaderWrapper>
+  );
 }
 
 const HeaderWrapper = styled.div`

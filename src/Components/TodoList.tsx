@@ -22,8 +22,6 @@ function TodoList() {
 
   // 변경한 필터링 적용
   useEffect(() => {
-    if (filter === 'all') {
-    }
     if (filter === 'todo') {
       setFiltering(false);
     }
