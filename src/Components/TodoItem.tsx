@@ -51,6 +51,7 @@ function TodoItem({
     handleEdit();
   };
 
+  // input이 공백일 시 alert 출력
   const handleEdit = () => {
     if (newContent === '') {
       alert('수정할 내용을 정확히 입력해주세요!');

@@ -32,6 +32,7 @@ const reducer = (state = initialState, action: ActionType) => {
         ...state,
       };
     }
+    // 성공한 경우에 실행
     case ADD_TODO_SUCCESS: {
       const newTodo = action.data;
       const newId = (state.count + 1).toString();
@@ -60,7 +61,7 @@ const reducer = (state = initialState, action: ActionType) => {
         ...state,
       };
     }
-
+    // 성공한 경우에 실행
     case DELETE_TODO_SUCCESS: {
       const todo = state.todoList.filter((todo) => todo.id !== action.data);
       return {
@@ -79,6 +80,7 @@ const reducer = (state = initialState, action: ActionType) => {
         ...state,
       };
     }
+    // 성공한 경우에 실행
     case UPDATE_STATUS_SUCCESS: {
       const todo = state.todoList.map((todo) => {
         if (todo.id === action.data) {
@@ -101,7 +103,7 @@ const reducer = (state = initialState, action: ActionType) => {
         ...state,
       };
     }
-
+    // 성공한 경우에 실행
     case UPDATE_CONTENT_SUCCESS: {
       const todo = state.todoList.map((todo) => {
         if (todo.id === action.data.todoId) {
@@ -116,19 +118,18 @@ const reducer = (state = initialState, action: ActionType) => {
       return state;
     }
 
+    // Get todo List
     case GET_TODO_LIST_REQUEST: {
       return {
         ...state,
       };
     }
-
     case GET_TODO_LIST_SUCCESS: {
       const todo = action.data;
       return {
         ...todo,
       };
     }
-
     case GET_TODO_LIST_FAILURE: {
       return state;
     }

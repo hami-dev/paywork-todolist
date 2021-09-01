@@ -86,8 +86,8 @@ function* watchUpdateContent() {
   yield takeLatest(UPDATE_CONTENT_REQUEST, updateTodoContent);
 }
 
-// GET TODOS
-function* getTodoList(action: Action): any {
+// GET TODOS from server
+function* getTodoList(): any {
   try {
     const getTodos: any = yield call(fetchTodos);
     yield put(getTodoListSuccess(getTodos));
