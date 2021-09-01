@@ -28,10 +28,10 @@ function TodoItem({
   isCheck,
   createdAt,
 }: TodoItemProps): ReactElement {
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-
-  const [newContent, setNewContent] = useState<string>(content);
   const dispatch = useDispatch();
+
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [newContent, setNewContent] = useState<string>(content);
   const cutCreatedAt = createdAt.substr(0, 10);
 
   // Todo 삭제

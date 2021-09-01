@@ -1,20 +1,29 @@
 import { getNowTime } from 'Utils/GetNowTime';
 import {
+  // ADD
   ADD_TODO_REQUEST,
   ADD_TODO_SUCCESS,
   ADD_TODO_FAILURE,
+  // DEL
   DELETE_TODO_REQUEST,
   DELETE_TODO_SUCCESS,
   DELETE_TODO_FAILURE,
+  // UPDATE STATUS
   UPDATE_STATUS_REQUEST,
   UPDATE_STATUS_SUCCESS,
   UPDATE_STATUS_FAILURE,
+  // UPDATE CONTENT
   UPDATE_CONTENT_REQUEST,
   UPDATE_CONTENT_SUCCESS,
   UPDATE_CONTENT_FAILURE,
+  // GET FILTER TODO
+  GET_FILTER_TODO_REQUEST,
+  GET_FILTER_TODO_SUCCESS,
+  GET_FILTER_TODO_FAILURE,
 } from 'Store/actions/action';
 
 import { initialState, ActionType } from 'Utils/HandleTodos';
+import TodoList from 'Components/TodoList';
 
 const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
@@ -105,6 +114,25 @@ const reducer = (state = initialState, action: ActionType) => {
     }
 
     case UPDATE_CONTENT_FAILURE: {
+      return state;
+    }
+
+    // Get Filtered Todo
+    case GET_FILTER_TODO_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case GET_FILTER_TODO_SUCCESS: {
+      const filtering = action.data === 'true' ? true : false;
+      const todo = state.todoList.filter((todo) => todo.isCheck === filtering);
+      return {
+        ...state,
+        count: TodoList.length,
+        todoList: [...todo],
+      };
+    }
+    case GET_FILTER_TODO_FAILURE: {
       return state;
     }
 

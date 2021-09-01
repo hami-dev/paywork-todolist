@@ -4,29 +4,25 @@ import styled from 'styled-components';
 import { CustomButton } from 'Components/TodoInput';
 import { useSelector } from 'react-redux';
 import { Itodo } from 'Utils/HandleTodos';
+import { useDispatch } from 'react-redux';
+import { getFilterTodoRequest } from 'Store/actions/action';
 
 function TodoList() {
   const todoList: Itodo[] = useSelector((state: any) => state.todoList);
 
   const [filter, setFilter] = useState<string>('all');
-  const [fTodo, setTodos] = useState<Itodo[]>([]);
+  const [filtering, setFiltering] = useState<boolean>(false);
 
   useEffect(() => {
-    let filteredTodo: Itodo[] = [];
-
     if (filter === 'all') {
-      filteredTodo = todoList;
     }
-
     if (filter === 'todo') {
-      filteredTodo = todoList.filter((item: Itodo) => item.isCheck === false);
+      setFiltering(false);
     }
     if (filter === 'done') {
-      filteredTodo = todoList.filter((item: Itodo) => item.isCheck === true);
+      setFiltering(true);
     }
-
-    setTodos(filteredTodo);
-  }, [filter, todoList]);
+  }, [filter]);
 
   // 버튼을 클릭할 경우 필터링 변경
   const handleFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,39 +34,42 @@ function TodoList() {
       <ButtonWrapper>
         <FilterButton
           id="all"
-          // onClick={handlFilterButton}
-          onClick={(e) => setFilter('all')}
+          onClick={handleFilterButton}
           filterSelected={filter === 'all'}
         >
           All
         </FilterButton>
         <FilterButton
           id="todo"
-          // onClick={handleFilterButton}
-          onClick={(e) => setFilter('todo')}
+          onClick={handleFilterButton}
           filterSelected={filter === 'todo'}
         >
           TO DO
         </FilterButton>
         <FilterButton
           id="done"
-          // onClick={handleFilterButton}
-          onClick={(e) => setFilter('done')}
+          onClick={handleFilterButton}
           filterSelected={filter === 'done'}
         >
           DONE
         </FilterButton>
       </ButtonWrapper>
       <ItemListWrapper>
-        {fTodo &&
-          fTodo.map((todo: any) => (
-            <TodoItem
-              id={todo.id}
-              content={todo.content}
-              isCheck={todo.isCheck}
-              createdAt={todo.createdAt}
-            />
-          ))}
+        {todoList &&
+          todoList.map((todo: any, index: number) => {
+            if (filter !== 'all' && todo.isCheck !== filtering) {
+              return null;
+            }
+            return (
+              <TodoItem
+                key={index}
+                id={todo.id}
+                content={todo.content}
+                isCheck={todo.isCheck}
+                createdAt={todo.createdAt}
+              />
+            );
+          })}
       </ItemListWrapper>
     </>
   );

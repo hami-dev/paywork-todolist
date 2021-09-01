@@ -5,6 +5,7 @@ import {
   DELETE_TODO_REQUEST,
   UPDATE_STATUS_REQUEST,
   UPDATE_CONTENT_REQUEST,
+  GET_FILTER_TODO_REQUEST,
   // add
   addTodoSuccess,
   addTodoFailure,
@@ -17,6 +18,9 @@ import {
   // update content
   upadteContentSuccess,
   upadteContentFailure,
+  // get filter todo
+  getFilterTodoSuccess,
+  getFilterTodoFailure,
 } from 'Store/actions/action';
 
 type Action = {
@@ -68,6 +72,7 @@ function* watchUpdateStatus() {
 
 // UPDATE CONTENT
 function* updateTodoContent(action: Action) {
+  console.log(action);
   try {
     yield delay(100);
     yield put(upadteContentSuccess(action.data));
@@ -80,11 +85,27 @@ function* watchUpdateContent() {
   yield takeLatest(UPDATE_CONTENT_REQUEST, updateTodoContent);
 }
 
+// GET FILTER TODO
+function* getFilterTODO(action: any) {
+  console.log(action);
+  try {
+    yield delay(100);
+    yield put(getFilterTodoSuccess(action.data));
+  } catch (error) {
+    yield put(getFilterTodoFailure(error));
+    console.error(error);
+  }
+}
+function* watchGetFilterTodo() {
+  yield takeLatest(GET_FILTER_TODO_REQUEST, getFilterTODO);
+}
+
 export default function* todoSaga() {
   yield all([
     fork(watchAdd),
     fork(watchDelete),
     fork(watchUpdateStatus),
     fork(watchUpdateContent),
+    fork(watchGetFilterTodo),
   ]);
 }

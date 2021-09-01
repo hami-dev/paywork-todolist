@@ -17,6 +17,10 @@ export const UPDATE_CONTENT_REQUEST = 'UPDATE_CONTENT_REQUEST';
 export const UPDATE_CONTENT_SUCCESS = 'UPDATE_CONTENT_SUCCESS';
 export const UPDATE_CONTENT_FAILURE = 'UPDATE_CONTENT_FAILURE';
 
+export const GET_FILTER_TODO_REQUEST = 'GET_FILTER_TODO_REQUEST';
+export const GET_FILTER_TODO_SUCCESS = 'GET_FILTER_TODO_SUCCESS';
+export const GET_FILTER_TODO_FAILURE = 'GET_FILTER_TODO_FAILURE';
+
 // const getTodoDataAction = (data: any) => ({
 //   type: GET_TODO_DATA,
 //   data,
@@ -90,7 +94,6 @@ const upadteStatusFailure = (error: any) => {
 };
 
 const upadteContentRequest = (todoId: string, content: string) => {
-  console.log('update', todoId, content);
   return {
     type: UPDATE_CONTENT_REQUEST,
     data: { todoId, content },
@@ -111,19 +114,49 @@ const upadteContentFailure = (error: any) => {
   };
 };
 
+const getFilterTodoRequest = (data: string) => {
+  return {
+    type: GET_FILTER_TODO_REQUEST,
+    data,
+  };
+};
+
+const getFilterTodoSuccess = (data: any) => {
+  return {
+    type: GET_FILTER_TODO_SUCCESS,
+    data,
+  };
+};
+
+const getFilterTodoFailure = (error: any) => {
+  return {
+    type: GET_FILTER_TODO_FAILURE,
+    error: error,
+  };
+};
+
 export {
   // getTodoDataAction,
   // getTodoListAction,
+
+  // add
   addTodoRequest,
   addTodoSuccess,
   addTodoFailure,
+  // del
   deleteTodoRequest,
   deleteTodoSuccess,
   deleteTodoFailure,
+  // update status
   upadteStatusRequest,
   upadteStatusSuccess,
   upadteStatusFailure,
+  // update content
   upadteContentRequest,
   upadteContentSuccess,
   upadteContentFailure,
+  // get filter todo
+  getFilterTodoRequest,
+  getFilterTodoSuccess,
+  getFilterTodoFailure,
 };

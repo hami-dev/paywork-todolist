@@ -15,6 +15,10 @@ export type contentType = {
   content: string;
 };
 
+export type FilterType = {
+  filter: boolean;
+};
+
 export type ActionType =
   //add
   | { type: 'ADD_TODO_REQUEST' }
@@ -31,7 +35,11 @@ export type ActionType =
   //update content
   | { type: 'UPDATE_CONTENT_REQUEST' }
   | { type: 'UPDATE_CONTENT_SUCCESS'; data: contentType }
-  | { type: 'UPDATE_CONTENT_FAILURE' };
+  | { type: 'UPDATE_CONTENT_FAILURE' }
+  //get Filtered Todo
+  | { type: 'GET_FILTER_TODO_REQUEST' }
+  | { type: 'GET_FILTER_TODO_SUCCESS'; data: string }
+  | { type: 'GET_FILTER_TODO_FAILURE' };
 
 export const initialState = {
   count: 4,
@@ -46,7 +54,7 @@ export const initialState = {
       id: '2',
       content: '방 청소 하기',
       createdAt: '2021-08-31T15:59:09.942Z',
-      isCheck: false,
+      isCheck: true,
     },
     {
       id: '3',
@@ -58,7 +66,7 @@ export const initialState = {
       id: '4',
       content: '가을 옷 꺼내기',
       createdAt: '2021-09-01T15:59:09.942Z',
-      isCheck: true,
+      isCheck: false,
     },
   ],
 };
