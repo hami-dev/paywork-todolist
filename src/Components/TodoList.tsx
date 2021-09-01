@@ -89,11 +89,6 @@ const FilterButton = styled(CustomButton)<{ filterSelected: boolean }>`
   box-sizing: content-box;
   margin: 0 1rem;
   transition: 1.5s;
-
-  /* &:hover {
-    border-bottom: ${({ filterSelected }) =>
-    filterSelected ? '1px solid #996dbf' : '1px solid  #d9d0df'};
-  } */
 `;
 
 const ItemListWrapper = styled.ul``;
