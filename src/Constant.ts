@@ -1,7 +1,7 @@
 export const BASE_URL = 'http://dummy-server.io/';
 
 export const TODO_ITEM_LIST = {
-  count: 4,
+  count: 2,
   todoList: [
     {
       id: '1',

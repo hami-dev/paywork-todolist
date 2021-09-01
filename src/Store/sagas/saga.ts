@@ -1,24 +1,50 @@
-import { takeEvery, put } from 'redux-saga/effects';
+import { delay, all, fork, takeLatest, put } from 'redux-saga/effects';
 
-import { GET_TODO_LIST, getTodoDataAction } from 'Store/actions/action';
+import {
+  GET_TODO_LIST,
+  ADD_TODO_REQUEST,
+  ADD_TODO_SUCCESS,
+  ADD_TODO_FAILURE,
+  DELETE_TODO_REQUEST,
+  DELETE_TODO_SUCCESS,
+  DELETE_TODO_FAILURE,
+  getTodoDataAction,
+  addTodoRequest,
+  addTodoSuccess,
+  addTodoFailure,
+  deleteTodoRequest,
+  deleteTodoSuccess,
+  deleteTodoFailure,
+} from 'Store/actions/action';
 
-import axios from 'axios';
-
-// const BASE_URL = 'http://dummy-server.io/';
-
-export function* getInitialTodoList(): any {
-  // const URL = BASE_URL + ':4000/todo';
-  const URL = '/Data/data.json';
+function* addTodo(action: any) {
   try {
-    const res = yield axios.get(URL);
-    const action = getTodoDataAction(res.data.todo);
-    yield put(action);
-    // console.log(res.data.todo);
+    yield delay(500);
+    // yield put(addTodoSuccess({ data: action.data }));
+    yield put(addTodoSuccess(action.data));
   } catch (e) {
-    console.log('error!!!', e);
+    yield put(addTodoFailure({ e }));
+    console.error(e);
   }
 }
+function* watchAdd() {
+  yield takeLatest(ADD_TODO_REQUEST, addTodo);
+}
 
-export function* getInitialTodoListSaga(): any {
-  yield takeEvery(GET_TODO_LIST, getInitialTodoList);
+function* deleteTodo(action: any) {
+  try {
+    yield delay(500);
+    // yield put(deleteTodoSuccess({ data: action.data }));
+    yield put(deleteTodoSuccess(action.data));
+  } catch (e) {
+    yield put(deleteTodoFailure({ e }));
+    console.error(e);
+  }
+}
+function* watchDelete() {
+  yield takeLatest(DELETE_TODO_REQUEST, deleteTodo);
+}
+
+export default function* todoSaga() {
+  yield all([fork(watchAdd), fork(watchDelete)]);
 }

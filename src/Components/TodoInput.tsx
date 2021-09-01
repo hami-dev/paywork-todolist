@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodoRequest } from 'Store/actions/action';
 
 function TodoInput() {
   const [inputValue, setInputValue] = useState('');
+  const dispatch = useDispatch();
 
   // submit 할 시 공백이면 alert출력
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,6 +16,9 @@ function TodoInput() {
       alert('내용을 입력해주세요!');
       return;
     }
+
+    dispatch(addTodoRequest(inputValue));
+    setInputValue('');
   };
 
   return (

@@ -1,8 +1,9 @@
-import { all } from 'redux-saga/effects';
-import { getInitialTodoListSaga } from 'Store/sagas/saga';
+import { all, call } from 'redux-saga/effects';
+
+import saga from './saga';
 
 function* rootSaga() {
-  yield all([getInitialTodoListSaga()]);
+  yield all([call(saga)]);
 }
 
 export default rootSaga;

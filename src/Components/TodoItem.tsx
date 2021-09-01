@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { CheckOutlined, DeleteOutlined } from '@ant-design/icons';
 import { CustomButton } from 'Components/TodoInput';
 
+import { useDispatch } from 'react-redux';
+import { deleteTodoRequest } from 'Store/actions/action';
+
 interface TodoItemProps {
   id: string;
   content: string;
@@ -17,8 +20,11 @@ function TodoItem({
   isCheck,
   createdAt,
 }: TodoItemProps): ReactElement {
+  const dispatch = useDispatch();
+
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log('del ', id);
+    dispatch(deleteTodoRequest(id));
   };
 
   const handleCheck = () => {

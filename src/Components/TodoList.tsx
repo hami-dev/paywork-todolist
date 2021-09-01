@@ -5,41 +5,33 @@ import { Itodo } from 'Utils/HandleTodos';
 import styled from 'styled-components';
 import { CustomButton } from 'Components/TodoInput';
 import { useSelector } from 'react-redux';
+import rootSaga from 'Store/sagas';
 
 function TodoList() {
-  const todoList: Itodo[] = TODO_ITEM_LIST.todoList;
+  // const todoList: Itodo[] = TODO_ITEM_LIST.todoList;
+  const todoList: any = useSelector((state: any) => state.todoList);
+  // const todoList = useSelector((state: any) => state.reducer);
 
   const [filter, setFilter] = useState<string>('all');
-  const [todos, setTodos] = useState<Itodo[]>(todoList);
-
-  const todoData = useSelector((state: any) => state.todoList);
-
-  // useEffect(() => {
-  //   console.log('기본값 : ', todoList);
-  //   console.log('todoList에서 : ', todoData.todoList);
-  //   setTodos(todoData);
-  // }, [todoData]);
+  const [todos, setTodos] = useState<any>(todoList);
 
   useEffect(() => {
-    // console.log(filter);
-    console.log('기본값 : ', todoList);
-    console.log('todoList에서 : ', todoData.todoList);
-
-    let filteredTodo: Itodo[] = todoData.todoList;
+    console.log(todoList);
+    let filteredTodo: any = [];
 
     if (filter === 'all') {
       filteredTodo = todoList;
     }
 
     if (filter === 'todo') {
-      filteredTodo = todoList.filter((item) => !item.isCheck);
+      filteredTodo = todoList.filter((item: any) => !item.isCheck);
     }
     if (filter === 'done') {
-      filteredTodo = todoList.filter((item) => item.isCheck);
+      filteredTodo = todoList.filter((item: any) => item.isCheck);
     }
 
     setTodos(filteredTodo);
-  }, [filter, todoData]);
+  }, [filter, todoList]);
 
   // 버튼을 클릭할 경우 필터링 변경
   const handleFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -72,8 +64,8 @@ function TodoList() {
         </FilterButton>
       </ButtonWrapper>
       <ItemListWrapper>
-        {todos.length > 0 &&
-          todos.map((todo) => (
+        {todos &&
+          todos.map((todo: any) => (
             <TodoItem
               id={todo.id}
               content={todo.content}
