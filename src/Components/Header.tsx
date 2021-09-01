@@ -42,6 +42,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   font-weight: 600;
   padding-top: 1.5rem;
+  height: 3rem;
   padding-left: 0.5rem;
   letter-spacing: -0.1rem;
 `;

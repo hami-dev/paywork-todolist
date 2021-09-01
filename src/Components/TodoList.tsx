@@ -100,6 +100,19 @@ const FilterButton = styled(CustomButton)<{ filterSelected: boolean }>`
   transition: 1.5s;
 `;
 
-const ItemListWrapper = styled.ul``;
+const ItemListWrapper = styled.ul`
+  height: calc(100% - 20rem);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 17%;
+    background-color: #d8cde9;
+    border-radius: 1rem;
+  }
+`;
 
 export default TodoList;
